@@ -15,25 +15,25 @@
 
 #define ONLY_DRAW_LAYER 0
 
-const char* GCODE2IMAGES_CMD_MSG_HELP =
+const char* GCODE2IMAGE_CMD_MSG_HELP =
 " verbs:\n"
-" \tv/version - Display gcode2images version\n"
-" \th/help - Display gcode2images help\n"
+" \tv/version - Display gcode2image version\n"
+" \th/help - Display gcode2image help\n"
 " \t2IMAGES - Export input gcode to image files (layer num of images)\n"
 ;
 
-const char* USAGE_MSG_HELP = "usage: gcode2images [--verbose] input [output]\n";
+const char* USAGE_MSG_HELP = "usage: gcode2image [--verbose] input [output]\n";
 
 void printver()
 {
-	std::cout << "gcode2images v" << GCODE2IMAGES_VERSION_MAJOR << "." << GCODE2IMAGES_VERSION_MINOR << "\n";
+	std::cout << "gcode2image v" << GCODE2IMAGE_VERSION_MAJOR << "." << GCODE2IMAGE_VERSION_MINOR << "\n";
 	std::cout << "(c) 2018, aardanza\n" 	<< std::endl;
 }
 
 void printhelp()
 {
 	printf("%s", USAGE_MSG_HELP);
-	printf("%s", GCODE2IMAGES_CMD_MSG_HELP);
+	printf("%s", GCODE2IMAGE_CMD_MSG_HELP);
 }
 
 int main(int argc, char *argv[])

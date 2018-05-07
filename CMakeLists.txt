@@ -4,12 +4,12 @@ cmake_minimum_required(VERSION 2.6.3)
 
 # Project name & Configuration
 # ------------------------------------------------------------------------------------------------------
-SET(PROJECT_MAIN_NAME "gcode2images")
+SET(PROJECT_MAIN_NAME "gcode2image")
 PROJECT(${PROJECT_MAIN_NAME})
 
 # The version number.
-set (GCODE2IMAGES_VERSION_MAJOR 1)
-set (GCODE2IMAGES_VERSION_MINOR 0)
+set (GCODE2IMAGE_VERSION_MAJOR 1)
+set (GCODE2IMAGE_VERSION_MINOR 0)
 
 # Configuration types
 SET(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Configs" FORCE)
@@ -31,9 +31,9 @@ ELSE()
     ENDIF()
 ENDIF()
 
-#grp G-code parser
+#gpr G-code parser
 ADD_SUBDIRECTORY( 3rdparty/gpr )
-SET_TARGET_PROPERTIES(gpr  PROPERTIES FOLDER "3rdparty")
+SET_TARGET_PROPERTIES(gpr PROPERTIES FOLDER "3rdparty")
 
 # configure a header file to pass some of the CMake settings
 # to the source code
