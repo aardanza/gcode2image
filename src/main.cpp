@@ -9,9 +9,9 @@
 
 #define PRINTER_SIZE_X  260                             // print X axis size mm
 #define PRINTER_SIZE_Y  220                             // print Y axis size mm
-#define FATIC_SCALE     20								// print area size and layer image scale factor
-#define LAYER_WIDTH     PRINTER_SIZE_X *  FATIC_SCALE   // layer paint image X size
-#define LAYER_HEIGHT    PRINTER_SIZE_Y *  FATIC_SCALE   // layer paint image Y size
+#define IMAGE_SCALE     20								// print area size and layer image scale factor
+#define LAYER_WIDTH     PRINTER_SIZE_X *  IMAGE_SCALE   // layer paint image X size
+#define LAYER_HEIGHT    PRINTER_SIZE_Y *  IMAGE_SCALE   // layer paint image Y size
 
 #define ONLY_DRAW_LAYER 0
 
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 		for (unsigned int i = 0; i < layers.size();i++)
 		{
 			GcodeLayerImage layer;
-			layers[i].scaleLines(FATIC_SCALE, FATIC_SCALE);
+			layers[i].scaleLines(IMAGE_SCALE, IMAGE_SCALE);
 #ifdef ONLY_DRAW_LAYER
 			//only paint selected layer
 			layer = layers[i].paint(cv::Size(LAYER_WIDTH, LAYER_HEIGHT), e0col, e1col);
@@ -98,10 +98,37 @@ int main(int argc, char *argv[])
 			}
 #endif
 
-			if (!layer.image.empty()){
-				std::string outFilePath = "output/";
-				outFilePath += out + std::to_string(i);
-				outFilePath += ".jpg";
+			if (!layer.image.empty())
+			{
+				std::string outFilePath, extension, filename;
+				outFilePath = out;
+				filename = out;
+
+				// Remove directory if present.
+				// Do this before extension removal incase directory has a period character.
+				const size_t last_slash_idx = outFilePath.find_last_of("\\/");
+				if (std::string::npos != last_slash_idx)
+				{
+					outFilePath.erase(last_slash_idx + 1);
+					filename.erase(0, last_slash_idx + 1);
+				}
+
+				// Remove extension if present.
+				extension = filename;
+				const size_t period_idx = filename.rfind('.');
+				if (std::string::npos != period_idx)
+				{
+					extension.erase(0, period_idx);
+					filename.erase(period_idx);
+				}
+				else{
+					extension = ".jpg";
+				}
+
+				filename += std::to_string(i);
+				filename += extension;
+
+				outFilePath += filename;
 
 				cv::imwrite(outFilePath.c_str(), layer.image);
 

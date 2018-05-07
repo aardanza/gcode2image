@@ -1,5 +1,6 @@
 #include "gcodelayer.h"
 
+#define LINE_THICKNESS 4
 
 GcodeLayer::GcodeLayer()
 {
@@ -20,7 +21,6 @@ GcodeLayer::~GcodeLayer() {}
 GcodeLayerImage GcodeLayer::paint(cv::Size layerSize, cv::Scalar extruder0Color, cv::Scalar extruder1Color, bool skirt, bool support, bool ooze)
 {
 	GcodeLayerImage draw;
-	int lineThickness = 5;
 
 	//draw.image = cv::Mat(layerSize.height, layerSize.width, CV_8U);
     draw.image = cv::Mat::zeros(layerSize.height, layerSize.width, CV_8UC3);
@@ -43,7 +43,7 @@ GcodeLayerImage GcodeLayer::paint(cv::Size layerSize, cv::Scalar extruder0Color,
 		case OOZE:
 		case SUPPORT:
 		case GAP:
-			cv::line(draw.image, _layerLines0[i].begin, _layerLines0[i].end, extruder0Color, lineThickness);
+			cv::line(draw.image, _layerLines0[i].begin, _layerLines0[i].end, extruder0Color, LINE_THICKNESS);
 			break;
 		}	
 	}
@@ -59,7 +59,7 @@ GcodeLayerImage GcodeLayer::paint(cv::Size layerSize, cv::Scalar extruder0Color,
 		case OOZE:
 		case SUPPORT:
 		case GAP:
-			cv::line(draw.image, _layerLines1[i].begin, _layerLines1[i].end, extruder1Color, lineThickness);
+			cv::line(draw.image, _layerLines1[i].begin, _layerLines1[i].end, extruder1Color, LINE_THICKNESS);
 			break;
 		}
 	}

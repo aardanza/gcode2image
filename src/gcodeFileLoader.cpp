@@ -8,22 +8,22 @@
 
 void parseGLine(gpr::block& b, cv::Point3d& actPos, unsigned int &extruderId)
 {
-	gpr::chunk_type tp = b.get_chunk(0).tp()/*.getAddrTp()*/;
-	char cmdLetter = b.get_chunk(0).get_word()/*.getwd()*/;
+	gpr::chunk_type tp = b.get_chunk(0).tp();
+	char cmdLetter = b.get_chunk(0).get_word();
 	
 	if (tp != 2 && cmdLetter == 'G')
 	{
-		int cmdVal = b.get_chunk(0).get_address().int_value()/*getAddrVal()*/;
+		int cmdVal = b.get_chunk(0).get_address().int_value();
 		switch (cmdVal)
 		{
 		case 2:
-			for (size_t i = 1; i < b.size()/*.chunks.size()*/; ++i)
+			for (size_t i = 1; i < b.size(); ++i)
 			{
 				if (b.get_chunk(i).tp() != gpr::CHUNK_TYPE_WORD_ADDRESS)
 					continue;
 
-				char letter = b.get_chunk(i).get_word()/*.getwd()*/;
-				double val = b.get_chunk(i).get_address().double_value();
+				char letter = b.get_chunk(i).get_word();
+				double val = b.get_chunk(i).get_address().float_value();
 				switch (letter)
 				{
 				case 'X':
@@ -49,36 +49,15 @@ void parseGLine(gpr::block& b, cv::Point3d& actPos, unsigned int &extruderId)
 			actPos.z = 0.f;
 			break;
 		}
-		case 1:
-			for (int i = 1; i < (int)b.size()/*.chunks.size()*/; ++i)
-			{
-				if (b.get_chunk(i).tp() != gpr::CHUNK_TYPE_WORD_ADDRESS)
-					continue;
-
-				char letter = b.get_chunk(i).get_word()/*.getwd()*/;
-				double val = b.get_chunk(i).get_address().double_value()/*.getAddrVal()*/;
-				switch (letter)
-				{
-				case 'X':
-                    actPos.x =  val;
-					continue;
-				case 'Y':
-                    actPos.y =  val;
-					continue;
-				case 'E':
-                    actPos.z =  val;
-					continue;
-				};
-			}
-			break;
 		case 0:
-			for (int i = 1; i < (int)b.size()/*.chunks.size()*/; ++i)
+		case 1:
+			for (int i = 1; i < (int)b.size(); ++i)
 			{
 				if (b.get_chunk(i).tp() != gpr::CHUNK_TYPE_WORD_ADDRESS)
 					continue;
 
-				char letter = b.get_chunk(i).get_word()/*.getwd()*/;
-				double val = b.get_chunk(i).get_address().double_value()/*.getAddrVal()*/;
+				char letter = b.get_chunk(i).get_word();
+				double val = b.get_chunk(i).get_address().float_value();
 				switch (letter)
 				{
 				case 'X':
@@ -98,7 +77,7 @@ void parseGLine(gpr::block& b, cv::Point3d& actPos, unsigned int &extruderId)
 
 	if (tp != 2 && cmdLetter == 'T')
 	{
-		int cmdVal = b.get_chunk(0).get_address().int_value()/*getAddrVal()*/;
+		int cmdVal = b.get_chunk(0).get_address().int_value();
 		extruderId = cmdVal;
 	}
 }
