@@ -1,8 +1,7 @@
 /**
-* @file layer.h
-* @author vicomtech
-* @date 25 Oct 2017
-* @brief File containing Layer class reference.
+* @file gcodelayer.h
+* @author aardanza
+* @brief File containing Gcode Layer class reference.
 *
 */
 
