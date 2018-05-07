@@ -27,7 +27,7 @@ const char* USAGE_MSG_HELP = "usage: gcode2images [--verbose] input [output]\n";
 void printver()
 {
 	std::cout << "gcode2images v" << GCODE2IMAGES_VERSION_MAJOR << "." << GCODE2IMAGES_VERSION_MINOR << "\n";
-	std::cout << "(c) 2018, aardanza, Vicomtech\n" 	<< std::endl;
+	std::cout << "(c) 2018, aardanza\n" 	<< std::endl;
 }
 
 void printhelp()
