@@ -1,0 +1,3 @@
+[submodule "3rdparty/gpr"]
+	path = 3rdparty/gpr
+	url = https://github.com/AitorArd/gpr
