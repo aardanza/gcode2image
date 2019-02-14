@@ -69,7 +69,7 @@ GcodeLayerImage GcodeLayer::paint(cv::Size layerSize, cv::Scalar extruder0Color,
 	cv::dilate(draw.image, draw.mask, se);
 
 	if (draw.mask.type() != CV_8U){
-		cv::cvtColor(draw.mask, draw.mask, CV_BGR2GRAY);
+		cv::cvtColor(draw.mask, draw.mask, cv::COLOR_BGR2GRAY/*CV_BGR2GRAY*/);
 	}
 
 	return draw;
